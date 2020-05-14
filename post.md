@@ -1,4 +1,4 @@
-![](/dsl.png)
+![Possible uses of DSLs](/dsl.png)
 
 # Making the computer speak BEE
 
@@ -81,3 +81,48 @@ A good illustration is HTML, which does not by itself support any kind of comput
 
 ## DSLs at Mpowered
 
+The main application provided by Mpowered is the B-BBEE compliance software [BEEtoolkit](https://mpowered.co.za/beetoolkit/). At the core of BEEtoolkit are the scoring calculations defined by the various sector codes from the [B-BBEE Commission](https://www.bbbeecommission.co.za/b-bbee-codes-of-good-practice/).
+
+As many of the readers will know, the sector codes are divided over several *elements* (Ownership, Management, Skills Development, etc.), and each element defines a number of *indicators* which make up the score of the element.
+
+The sector code documents use a very brief format to define the indicators.
+
+<img src="indicators_table.png" alt="Indicators table" width="75%">
+
+The above table shows the first two Ownership indicators of the amended ICT codes. Note how the table covers only the essential information related to each indicator: the measured value ("Exercisable Voting Rights ..."), the compliance target and the weighting points.
+
+The indicator tables speak the language of the BEE expert. Wouldn't it be nice if the BEEtoolkit software could understand this language as well?
+
+Indeed, our code has a DSL for indicator definitions. (And to be clear, this DSL was in place before I started here.) Here is what the above indicators look like in our DSL:
+
+```yaml
+voting_rights:
+  black_people:
+    total: 100
+    points: 4
+    target: 0.3
+    actual: exercisable_voting_rights_of_black_people
+    amount_type: percentage
+    description: Exercisable voting rights of black people
+    actual_description: Voting rights of black people
+    total_description: Total voting rights
+  black_females:
+    total: 100
+    points: 2
+    target: 0.1
+    actual: exercisable_voting_rights_of_black_females
+    amount_type: percentage
+    description: Exercisable voting rights of black females
+    actual_description: Voting rights of black females
+    total_description: Total voting rights
+```
+
+(Some readers will recognize the above snippet as being embedded in the [YAML format](http://www.yaml.org/). This is only an implementation technicality. It is still a DSL in the sense it speaks to the domain experts and gets interpreted according to the rules of BEE.)
+
+We recognize the key information from the table in the sector codes, although laid out slightly differently. There are also some extra descriptions and formatting in there, which is used when the indicators get presented in various parts of our system. This extra information is definitely part of the domain, and thus makes sense to support in the DSL.
+
+Additionally, the sector codes often define side-conditions that change the parameters of an indicator, etc. Our DSL is able to capture these variations as well, but we're not going into the details here.
+
+Note that the above definitions are the *single source of truth* for said indicators in our system. That code is accessed every time a user opens up a scorecard in the browser, downloads a PDF report, etc. This also means that a BEE expert could, in principle, tweak an indicator throughout the whole system without knowing the slightest about programming in general.
+
+And to bring the point home again: All of this is possible because of the *limitations* of the DSL. The indicator definition itself does not know where data comes from or in what context it is being used -- and that is precisely why we are able to use the definitions in different ways throughout the system.
