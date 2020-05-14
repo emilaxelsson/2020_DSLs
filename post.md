@@ -62,6 +62,8 @@ Row 7: As Row 5.
 Row 8: Knit.
 ```
 
+<img src="pie-crust-basketweave.jpg" alt="Pie crust basketweave pattern" width="30%">
+
 I admittedly have no idea how to read the above. But to someone who knows the language, it makes perfect sense. Again, the point is that it captures exactly the right amount of information for creating the pattern. It does not say anything about color or thickness of the thread, for example.
 
 
