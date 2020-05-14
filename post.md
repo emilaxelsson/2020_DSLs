@@ -125,4 +125,14 @@ Additionally, the sector codes often define side-conditions that change the para
 
 Note that the above definitions are the *single source of truth* for said indicators in our system. That code is accessed every time a user opens up a scorecard in the browser, downloads a PDF report, etc. This also means that a BEE expert could, in principle, tweak an indicator throughout the whole system without knowing the slightest about programming in general.
 
-And to bring the point home again: All of this is possible because of the *limitations* of the DSL. The indicator definition itself does not know where data comes from or in what context it is being used -- and that is precisely why we are able to use the definitions in different ways throughout the system.
+
+
+## Summary and discussion
+
+There is often a big gap between the notation used for specifying or explaining how a program works and the code used to implement that program. Domain-specific languages can be used to bridge that gap, making the specification and implementation be the same thing.
+
+Additionally, well-designed DSLs permit flexible interpretations and analyses that are typically out of range in general-purpose code.
+
+DSLs range all the way from highly specialized (and rather simple) ones, such as our DSL for BEE, to widly used and standardized ones, such as HTML. Don't be afraid to make one yourself, if there's nothing suitable available already!
+
+Finally, it should be mentioned that DSLs don't have to be entirely separate languages. Well-designed libraries in ordinary programming languages can also be made to provide DSL-like vocabularies. An example of this is the [RSpec library](https://rspec.info/) for testing Ruby code. In fact, putting on the DSL thinking hat while designing libraries can actually help us making them more robust and easier to work with.
