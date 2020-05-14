@@ -42,6 +42,10 @@ Note how the HTML code captures exactly the intention of the text -- no more and
 
 ### MATLAB
 
+```matlab
+solve('3*x+2*y+z=1', 'y=2', 'x+2*y=3')
+```
+
 [MATLAB](https://en.wikipedia.org/wiki/MATLAB) ("MATrix LABoratory") is a programming language for numerical processing. It aims to make such programs easier to write by supporting notation familiar to mathematicians. A large part of our daily lives are built around data processing units -- for example TV sets, mobile phones and base stations, control systems in smart cars, etc. There's a high probability that these programs are based on mathematical equations that have first been prototyped and tested in MATLAB. Some applications even run directly in MATLAB and its associated tooling.
 
 ### Kitting stitch patterns
