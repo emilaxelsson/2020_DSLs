@@ -6,7 +6,7 @@ What do web pages, numeric computing, knitting and BEE have in common? Not much,
 
 I'm a software developer at Mpowered. I came here after many years of programming language research at [Chalmers University](https://www.chalmers.se). More specifically, my area was in domain-specific programming languages (DSLs). These are "little languages" that are made to solve problems in a limited domain. As such, they are designed to speak the language of the *domain expert* rather than the programmer.
 
-This post will present DSLs in general, demonstrate some of the uses of DSLs at Mpowered, and show some ideas we are exploring for the future.
+This post will present DSLs in general and demonstrate a DSL we use at Mpowered.
 
 
 
@@ -48,9 +48,9 @@ solve('3*x+2*y+z=1', 'y=2', 'x+2*y=3')
 
 [MATLAB](https://en.wikipedia.org/wiki/MATLAB) ("MATrix LABoratory") is a programming language for numerical processing. It aims to make such programs easier to write by supporting notation familiar to mathematicians. A large part of our daily lives are built around data processing units -- for example TV sets, mobile phones and base stations, control systems in smart cars, etc. There's a high probability that these programs are based on mathematical equations that have first been prototyped and tested in MATLAB. Some applications even run directly in MATLAB and its associated tooling.
 
-### Kitting stitch patterns
+### Knitting stitch patterns
 
-Just to throw in a bit of a wild card into the mix: there is even a DSL for [kitting patterns](https://www.knittingstitchpatterns.com).
+Just to throw in a bit of a wild card into the mix: there is even a DSL for [knitting patterns](https://www.knittingstitchpatterns.com).
 
 How about this program for making a ["pie crust basketweave"](https://www.knittingstitchpatterns.com/2014/08/pie-crust-basketweave.html) pattern:
 
@@ -76,7 +76,7 @@ I admittedly have no idea how to read the above. But to someone who knows the la
 
 The main advantage of DSLs is the fact that they can be used by domain experts who are not necessarily programmers in the ordinary sense. But this is not just a matter of understandability. By limiting the kinds of programs one can write, we can actually do *more* things with them than we can with programs in general-purpose languages.
 
-A good illustration is HTML, which does not by itself support any kind of computations or actions (such as reading/writing to/from the disk, starting other programs, etc.). Because of this limitation, we can do things with HTML pages that we generally cannot do with ordinary programs (written in Java, say):
+A good illustration is HTML, which does not by itself support any kind of computations or actions (such as reading the disk, starting other programs, etc.). Because of this limitation, we can do things with HTML pages that we generally cannot do with ordinary programs (written in Java, say):
 
   * We can interpret the same HTML page in different ways -- with different styles and layouts, for example.
   * We can analyze the page, e.g. to see what other pages it links to.
@@ -125,11 +125,11 @@ voting_rights:
 
 (Some readers will recognize the above snippet as being embedded in the [YAML format](http://www.yaml.org/). This is only an implementation technicality. It is still a DSL in the sense it speaks to the domain experts and gets interpreted according to the rules of BEE.)
 
-We recognize the key information from the table in the sector codes, although laid out slightly differently. There are also some extra descriptions and formatting in there, which is used when the indicators get presented in various parts of our system. This extra information is definitely part of the domain, and thus makes sense to support in the DSL.
+We recognize the key information from the sector code tables, although it is laid out slightly differently. There are also some extra descriptions and formatting in there, which is used when the indicators get presented in various parts of our system. This extra information is definitely part of the domain, and thus makes sense to support in the DSL.
 
-Additionally, the sector codes often define side-conditions that change the parameters of an indicator, etc. Our DSL is able to capture these variations as well, but we're not going into the details here.
+The sector codes often define side-conditions that change the parameters of an indicator, etc. Our DSL is able to capture these variations as well, but we're not going into the details here.
 
-Note that the above definitions are the *single source of truth* for said indicators in our system. That code is accessed every time a user opens up a scorecard in the browser, downloads a PDF report, etc. This also means that a BEE expert could, in principle, tweak an indicator throughout the whole system without knowing the slightest about programming in general.
+Note that the above definitions are the *single source of truth* for said indicators in our system. That code is accessed every time a user opens up a scorecard in the browser, downloads a PDF report, etc. This also means that a BEE expert could, in principle, tweak an indicator throughout the whole system without knowing the slightest thing about programming in general.
 
 
 
@@ -139,6 +139,8 @@ There is often a big gap between the notation used for specifying or explaining 
 
 Additionally, well-designed DSLs permit flexible interpretations and analyses that are typically out of range in general-purpose code.
 
-DSLs range all the way from highly specialized (and rather simple) ones, such as our DSL for BEE, to widly used and standardized ones, such as HTML. Don't be afraid to make one yourself, if there's nothing suitable available already!
+DSLs range all the way from highly specialized ones, such as our DSL for BEE, to widly used and standardized ones, such as HTML. Don't be afraid to make one yourself, if there's nothing suitable available already!
 
-Finally, it should be mentioned that DSLs don't have to be entirely separate languages. Well-designed libraries in ordinary programming languages can also be made to provide DSL-like vocabularies. An example of this is the [RSpec library](https://rspec.info/) for testing Ruby code. In fact, putting on the DSL thinking hat while designing libraries can actually help us making them more robust and easier to work with.
+Finally, it should be mentioned that DSLs don't have to be entirely separate languages. Well-designed libraries in ordinary programming languages can also be made to provide DSL-like vocabularies. An example of this is the [RSpec library](https://rspec.info/) for testing Ruby code.
+
+In fact, putting on the DSL thinking hat while designing libraries can actually help us making them more robust and easier to work with.
