@@ -133,6 +133,48 @@ Note that the above definitions are the *single source of truth* for said indica
 
 
 
+## When to DSL?
+
+Designing a versatile, high-quality DSL, such as HTML, is rarely a good idea. The costs can easily outweigh the benefits, and chances are that suitable options already exist. However, DSLs can also be rather simple and highly specialized. Projects can even make DSLs for purely internal use.
+
+You have already seen one example of a simple but useful DSL for BEE indicators. Here are two more ideas that can hopefully give some inspiration.
+
+### Numeric expressions
+
+Imagine you have an application centered around numeric calculations, and you find out there's a need to not only run the calculations but also inspect them. For example, you may want to
+
+  * track what variables different parts of the calculation refer to
+  * generate the expressions in other formats (e.g. Excel or Javascript)
+  * etc.
+
+DSLs shine in situations like this. And because of the universality of numeric expressions, many such DSLs already exist. One example is the Ruby package  [Dentaku](https://github.com/rubysolo/dentaku).
+
+### Data validation
+
+Does your program receive data from different sources and you want to ensure consistent data validation across the system?
+
+You may try to invent a simple format that expresses your requirements. For example, the following could describe a valid person in a job application system:
+
+```yaml
+age:
+  type: number
+  greater_or_equal: 0
+status:
+  type: string
+  one_of:
+    - student
+    - unemployed
+    - employed
+```
+
+Again, this situation is common enough that many alternatives already exist in different programming languages. Ruby's [Active Record](https://api.rubyonrails.org/classes/ActiveRecord/Base.html) is one example of a library that comes with a validation DSL.
+
+I've previously said that the limitations of a DSL allows us to do more it. Can you think about something the above description could be used for besides validating data?
+
+Well, we can just as well view the description as a "template" for generating new data, can't we? In other words, a single data format description can be used both for validation and test data generation. DSLs for the win!
+
+
+
 ## Summary and discussion
 
 There is often a big gap between the notation used for specifying or explaining how a program works and the code used to implement that program. Domain-specific languages can be used to bridge that gap, making the specification and implementation be the same thing.
